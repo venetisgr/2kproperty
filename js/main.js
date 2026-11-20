@@ -325,6 +325,19 @@
     input.addEventListener('input', function () { input.closest('.field').classList.remove('has-error'); });
   });
 
+  /* ------------------------------------------------------------------
+   * Logo / "back to top" → return to the top of the home page
+   * ------------------------------------------------------------------ */
+  $$('.brand, a[href="#top"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      setMenu(false);
+      if (lb.open) closeLb();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    });
+  });
+
   /* Footer year */
   var y = $('#year');
   if (y) y.textContent = new Date().getFullYear();
